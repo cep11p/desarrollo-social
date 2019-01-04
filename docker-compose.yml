@@ -28,7 +28,7 @@ services:
   pril:
     image: php_yii_ds
     volumes:
-      - /var/www/html/desarrollo-social/pril/desarrolloPRILBack:/var/www/html
+      - /var/www/html/desarrollo-social/pril/backend-pril:/var/www/html
     environment:
       DB_HOST: 'pril_db'
       DB_NAME: 'pril'
@@ -70,7 +70,7 @@ services:
   lugar:
     image: php_yii_ds
     volumes:
-      - /var/www/html/desarrollo-social/registral/desarrolloLugarBack:/var/www/html
+      - /var/www/html/desarrollo-social/lugar/backend-lugar:/var/www/html
     environment:
       DB_HOST: 'lugar_db'
       DB_NAME: 'lugar'
