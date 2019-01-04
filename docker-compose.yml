@@ -1,0 +1,104 @@
+version: '2'
+
+services:
+
+##### RECURSOS-SOCIALES
+
+  recursos_sociales:
+    image: php_yii_ds
+    volumes:
+      - /var/www/html/desarrollo-social/recursos-sociales/backend-recursos-sociales:/var/www/html
+    environment:
+      DB_HOST: 'recursos-sociales_db'
+      DB_NAME: 'recursos-sociales'
+    labels:
+     - "traefik.backend=recursos-sociales"
+     - "traefik.frontend.rule=Host:recursos-sociales.local"
+     - "traefik.port=80"
+
+  recursos_sociales_db:
+    image: mysql:5.6
+    environment:
+     MYSQL_ROOT_PASSWORD: root
+    volumes:
+     - /var/www/html/desarrollo-social/recursos-sociales/dbdata:/var/lib/mysql
+
+##### PRIL
+
+  pril:
+    image: php_yii_ds
+    volumes:
+      - /var/www/html/desarrollo-social/pril/desarrolloPRILBack:/var/www/html
+    environment:
+      DB_HOST: 'pril_db'
+      DB_NAME: 'pril'
+    labels:
+     - "traefik.backend=pril"
+     - "traefik.frontend.rule=Host:pril.local"
+     - "traefik.port=80"
+
+  pril_db:
+    image: mysql:5.6
+    environment:
+     MYSQL_ROOT_PASSWORD: root
+    volumes:
+     - /var/www/html/desarrollo-social/pril/dbdata:/var/lib/mysql
+
+##### REGISTRAL
+
+  registral:
+    image: php_yii_ds
+    volumes:
+      - /var/www/html/desarrollo-social/registral/desarrolloSocialREGISTRAL:/var/www/html
+    environment:
+      DB_HOST: 'registral_db'
+      DB_NAME: 'registral'
+    labels:
+     - "traefik.backend=registral"
+     - "traefik.frontend.rule=Host:registral.local"
+     - "traefik.port=80"
+
+  registral_db:
+    image: mysql:5.6
+    environment:
+     MYSQL_ROOT_PASSWORD: root
+    volumes:
+     - /var/www/html/desarrollo-social/registral/dbdata:/var/lib/mysql
+
+##### LUGAR
+
+  lugar:
+    image: php_yii_ds
+    volumes:
+      - /var/www/html/desarrollo-social/registral/desarrolloLugarBack:/var/www/html
+    environment:
+      DB_HOST: 'lugar_db'
+      DB_NAME: 'lugar'
+    labels:
+     - "traefik.backend=lugar"
+     - "traefik.frontend.rule=Host:lugar.local"
+     - "traefik.port=80"
+
+  lugar_db:
+    image: mysql:5.6
+    environment:
+     MYSQL_ROOT_PASSWORD: root
+    volumes:
+     - /var/www/html/desarrollo-social/lugar/dbdata:/var/lib/mysql
+
+##### PROXY
+
+  proxy:
+    image: traefik:1.7.6
+    restart: always
+    command: --web --docker --docker.domain=local
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./config/proxy/traefik.toml:/etc/traefik/traefik.toml
+    labels:
+     - "traefik.backend=proxy"
+     - "traefik.frontend.rule=Host:proxy.local"
+     - "traefik.port=8080"
+
