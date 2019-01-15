@@ -2,26 +2,26 @@ version: '2'
 
 services:
 
-##### RECURSOS-SOCIALES
+##### RECURSO-SOCIAL
 
-  recursos_sociales:
+  recurso_social:
     image: php_yii_ds
     volumes:
-      - /var/www/html/desarrollo-social/recursos-sociales/backend-recursos-sociales:/var/www/html
+      - /var/www/html/desarrollo-social/recurso-social/backend-recurso-social:/var/www/html
     environment:
-      DB_HOST: 'recursos-sociales_db'
-      DB_NAME: 'recursos-sociales'
+      DB_HOST: 'recurso_social_db'
+      DB_NAME: 'recursosocial'
     labels:
-     - "traefik.backend=recursos-sociales"
-     - "traefik.frontend.rule=Host:recursos-sociales.local"
+     - "traefik.backend=recurso-social"
+     - "traefik.frontend.rule=Host:recurso-social.local"
      - "traefik.port=80"
 
-  recursos_sociales_db:
+  recurso_social_db:
     image: mysql:5.6
     environment:
      MYSQL_ROOT_PASSWORD: root
     volumes:
-     - /var/www/html/desarrollo-social/recursos-sociales/dbdata:/var/lib/mysql
+     - /var/www/html/desarrollo-social/recurso-social/dbdata:/var/lib/mysql
 
 ##### PRIL
 
@@ -38,6 +38,8 @@ services:
      - "traefik.port=80"
 
   pril_db:
+    ports:
+     - 3306:3306
     image: mysql:5.6
     environment:
      MYSQL_ROOT_PASSWORD: root
@@ -60,6 +62,8 @@ services:
 
   registral_db:
     image: mysql:5.6
+    ports:
+     - 3307:3306
     environment:
      MYSQL_ROOT_PASSWORD: root
     volumes:
