@@ -17,6 +17,8 @@ services:
      - "traefik.port=80"
 
   recurso_social_db:
+    ports:
+     - 3306:3306
     image: mysql:5.6
     environment:
      MYSQL_ROOT_PASSWORD: root
@@ -39,7 +41,7 @@ services:
 
   pril_db:
     ports:
-     - 3306:3306
+     - 3307:3306
     image: mysql:5.6
     environment:
      MYSQL_ROOT_PASSWORD: root
