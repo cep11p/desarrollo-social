@@ -1,0 +1,12 @@
+version: '2'
+
+services:
+  recurso_social: 
+   environment:
+       RUNMODE: prod
+       SERVICIO_REGISTRAL: app\components\ServicioRegistral
+
+  registral: 
+   environment:
+       RUNMODE: prod
+       SERVICIO_LUGAR: app\components\ServicioLugar
