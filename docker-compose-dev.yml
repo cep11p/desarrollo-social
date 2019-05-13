@@ -1,6 +1,9 @@
 version: '2'
 
 services:
-  prilphp: 
+  recurso_social: 
+   environment:
+       RUNMODE: dev
+  registral: 
    environment:
        RUNMODE: dev
