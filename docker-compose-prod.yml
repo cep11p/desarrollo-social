@@ -11,3 +11,8 @@ services:
    environment:
        RUNMODE: prod
        SERVICIO_LUGAR: app\components\ServicioLugar
+  pril: 
+   environment:
+       RUNMODE: prod
+       SERVICIO_REGISTRAL: app\components\ServicioRegistral
+       SERVICIO_LUGAR: app\components\ServicioLugar
