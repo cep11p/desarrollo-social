@@ -94,6 +94,29 @@ services:
     volumes:
      - /var/www/html/desarrollo-social/lugar/dbdata:/var/lib/mysql
 
+##### ACCESS-CONTROL-USER
+
+  access_control_user:
+    image: php_yii_ds
+    volumes:
+      - /var/www/html/desarrollo-social/access-control-user/api-user:/var/www/html
+    environment:
+      DB_HOST: 'access_control_user_db'
+      DB_NAME: 'accesscontroluser'
+    labels:
+     - "traefik.backend=api-user"
+     - "traefik.frontend.rule=Host:api-user.local"
+     - "traefik.port=80"
+
+  access_control_user_db:
+    ports:
+     - 3310:3306
+    image: mariadb:10.4
+    environment:
+     MYSQL_ROOT_PASSWORD: root
+    volumes:
+     - /var/www/html/desarrollo-social/access-control-user/dbdata:/var/lib/mysql
+
 ##### PROXY
 
   proxy:
